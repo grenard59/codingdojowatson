@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Watson</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/stylesheets/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/stylesheets/font-awesome-4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/stylesheets/style.css">
+    <script type="text/javascript" src="/assets/javascripts/jquery-2.1.4.min.js"></script>
+
+</head>
+<body>
+
+
+<div class="container">
+    <div class="row">
+        <div class="form-group col-md-8 ">
+            <input type="text" class="form-control" id="input_watson"/>
+        </div>
+        <div class="col-md-offset-1 col-md-2">
+            <button class="btn btn-default btn-watson" onclick="sendToWatson()">SEND</button>
+        </div>
+    </div>
+    <div class="row">
+        <div id="response_watson" class="col-md-12">
+            <%=response%>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function sendToWatson() {
+        var input = $("#input_watson").val();
+        if (input) {
+            $.ajax({
+                url: "/",
+                method: "POST",
+                data: input,
+                dataType: 'json',
+                success: function (res) {
+                    console.log(res);
+                    $("#response_watson").html(JSON.stringify(res.response));
+                }
+            });
+        }
+    }
+</script>
+</body>
+
+</html>
